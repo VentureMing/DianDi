@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diandi.dao.article.ArticleCollectDao">
+
+    <delete id="deleteCollectByAuthorIdAndArticleId">
+        DELETE FROM article_collect
+        WHERE article_id = #{articleId} AND collector_id = #{authorId}
+    </delete>
+
+    <select id="listCollectArticle" resultType="ArticleCollect">
+        SELECT *
+        FROM articel_collect
+        WHERE collector_id = #{authorId}
+        LIMIT #{offset}, #{rows}
+    </select>
+
+
+
+    <select id="listAllCollectByArticleId" resultType="ArticleCollect">
+        SELECT *
+        FROM article_collect
+        WHERE article_id = #{value}
+    </select>
+
+    <select id="countByCollectorId" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM article_collect
+        WHERE collector_id = #{value}
+    </select>
+
+    <select id="getCollect" resultType="ArticleCollect">
+        SELECT *
+        FROM article_collect
+        WHERE article_id = #{articleId} AND collector_id = #{authorId}
+    </select>
+
+    <select id="listAllIdByAuthorId" resultType="ArticleCollect">
+        SELECT *
+        FROM article_collect
+        WHERE collector_id = #{value}
+    </select>
+
+
+    <update id="update" parameterType="ArticleCollect">
+        UPDATE article_collect
+        <set>
+            <if test="articleId != null">
+            article_id=#{articleId},
+            </if>
+            <if test="collectorId != null">
+            collector_id=#{collectorId}
+            </if>
+        </set>
+        <where>
+            collect_id=#{collectId}
+        </where>
+    </update>
+
+    <delete id="delete">
+        DELETE FROM article_collect
+        WHERE collect_id = #{value}
+    </delete>
+
+    <insert id="insert" parameterType="ArticleCollect" useGeneratedKeys="true" keyProperty="collectId">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="collectId">
+            SELECT LAST_INSERT_ID() AS collectId
+        </selectKey>
+        INSERT INTO article_collect (
+        article_id,
+        collector_id,
+        collect_date
+        ) VALUE (
+        #{articleId},
+        #{collectorId},
+        NOW()
+        )
+    </insert>
+</mapper>

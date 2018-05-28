@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diandi.dao.article.ArticleComplainDao">
+    <update id="update" parameterType="ArticleComplain">
+        UPDATE article_complain
+        <set>
+            <if test="articleId != null">
+                article_id=#{articleId},
+            </if>
+            <if test="complainerId != null">
+                complainer_id=#{complainerId},
+            </if>
+            <if test="content != null">
+                content=#{content},
+            </if>
+        </set>
+        <where>
+            articleId=#{articleId}
+        </where>
+    </update>
+
+    <delete id="delete">
+        DELETE FROM article_complain
+        WHERE articleId = #{value}
+    </delete>
+
+    <insert id="insert" parameterType="ArticleComplain" useGeneratedKeys="true" keyProperty="articleId">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="articleId">
+            SELECT LAST_INSERT_ID() AS articleId
+        </selectKey>
+        INSERT INTO article_complain (
+        complainer_id,
+        article_id,
+        content,
+        time
+        ) VALUE (
+        #{complainerId},
+        #{articleId},
+        #{content},
+        NOW()
+        )
+    </insert>
+</mapper>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diandi.dao.author.AuthorImageDao">
+
+    <select id="getImageById" resultType="AuthorImage">
+        SELECT *
+        FROM author_image
+        WHERE image_id = #{value}
+    </select>
+
+    <!--<select articleId="getImageByCategoryAndAuthor" resultType="AuthorImage">-->
+    <!--SELECT *-->
+    <!--FROM author_image img-->
+    <!--WHERE img.image_category = #{imageCategory} AND image.author_id = #{authorId}-->
+    <!--</select>-->
+
+    <select id="getAuthorUniqueImage" resultType="AuthorImage">
+    SELECT *
+    FROM author_image
+    WHERE image_category = #{categoryId} AND author_id = #{authorId}
+    </select>
+
+    <select id="listImageByAuthorId" resultType="AuthorImage" >
+    SELECT *
+    FROM author_image
+    WHERE author_id = #{authorId}
+    LIMIT #{offset}, #{rows}
+    </select>
+
+    <select id="listImageByAuthorAndCategory" resultType="AuthorImage">
+    SELECT *
+    FROM author_image
+    WHERE author_id = #{authorId} AND category = #{category}
+    LIMIT #{offset}, #{rows}
+    </select>
+
+    <select id="getUseCount" resultType="java.lang.Integer">
+        SELECT use_count
+        FROM author_image
+        WHERE image_id = #{value}
+    </select>
+    <!--需要修改-->
+    <select id="getImageByAuthorId" resultType="AuthorImage" >
+        SELECT *
+        FROM author_image
+        WHERE author_id = #{value}
+    </select>
+
+    <update id="updateUseCountPlus">
+        UPDATE author_image
+        SET use_count = use_count + 1
+        WHERE image_id = #{value}
+    </update>
+
+    <update id="updateUseCountMinus">
+        UPDATE author_image
+        SET use_count = use_count - 1
+        WHERE image_id = #{value}
+    </update>
+    <!--需要修改-->
+    <update id="update" parameterType="AuthorImage">
+        UPDATE author_image
+        <set>
+            <if test="bloggerId != null">
+                author_id=#{authorId},
+            </if>
+            <if test="describe != null">
+                describe=#{describe},
+            </if>
+            <if test="imageCategory != null">
+                image_category=#{imageCategory},
+            </if>
+            <if test="path != null">
+                path=#{path},
+            </if>
+            <if test="title != null">
+                title=#{title},
+            </if>
+            <if test="uploadDate != null">
+                upload_date=#{uploadDate},
+            </if>
+        </set>
+        <where>
+            image_id = #{imageId}
+        </where>
+    </update>
+    <delete id="delete">
+        DELETE FROM author_image
+        WHERE image_id = #{value}
+    </delete>
+    <insert id="insert" parameterType="AuthorImage" useGeneratedKeys="true" keyProperty="imageId">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="imageId">
+            SELECT LAST_INSERT_ID() AS imageId
+        </selectKey>
+        INSERT INTO author_image (
+        author_id,
+        describe,
+        image_category,
+        path,
+        title,
+        upload_date) VALUE (
+        #{authorId},
+        #{describe},
+        ifnull(#{imageCategory}, 0),
+        #{path},
+        #{title},
+        NOW())
+    </insert>
+</mapper>

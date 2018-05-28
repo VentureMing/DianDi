@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diandi.dao.article.ArticleAndCategoryDao">
+
+    <select id="listArticleIdsByCategoryIds" resultType="java.lang.Integer" parameterType="list">
+        SELECT DISTINCT art.article_id
+        FROM article_and_category art WHERE art.category_id IN
+        <foreach collection="categoryIds"
+                 item="articleId"
+                 open="("
+                 separator=","
+                 close=")">
+            #{articleId}
+        </foreach>
+    </select>
+
+
+    <update id="update" parameterType="ArticleAndCategory">
+        UPDATE article_and_category
+        <set>
+            <if test="articleId != null">
+                article_id=#{articleId},
+            </if>
+            <if test="categoryIds != null">
+                category_id=#{categoryId},
+            </if>
+        </set>
+        <where>
+            articleId=#{articleId}
+        </where>
+
+    </update>
+
+    <delete id="delete">
+        DELETE FROM article_and_category
+        WHERE articleId = #{value}
+    </delete>
+
+    <insert id="insert" parameterType="ArticleAndCategory" useGeneratedKeys="true" keyProperty="articleId">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="articleId">
+            SELECT LAST_INSERT_ID() AS articleId
+        </selectKey>
+        INSERT INTO article_and_category (
+        article_id,
+        category_id,
+        ) VALUE (
+        #{articleId},
+        #{categoryId},
+        )
+    </insert>
+</mapper>

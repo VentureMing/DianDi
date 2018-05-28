@@ -1,0 +1,81 @@
+body{
+    background-color:#F6F6F6 ;
+}
+.layui-card:hover {
+    -webkit-box-shadow: 0 1px 6px #ccc;
+    -moz-box-shadow: 0 1px 6px #ccc;
+    -ms-box-shadow: 0 1px 6px #ccc;
+    -o-box-shadow: 0 1px 6px #ccc;
+    box-shadow: 0 1px 6px #ccc;
+    background: #FFFFFF;
+    border-bottom: 1px solid #ebebeb;
+
+}
+
+.main-container {
+    margin-left: 10%;
+    width: 78%;
+    margin-top: 10px
+}
+
+.my-list-card {
+    margin-bottom: 8px;
+    background-color: #FFFFFF;
+}
+
+.my-layui-card-header {
+    padding-top: 0px;
+    border-bottom: 0px
+}
+
+.card-content {
+    height: 96px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+}
+
+.layui-card-body h4 {
+    color: #B4B4B4;
+    font-size: 15px;
+}
+.layui-card-body span{
+    color: #8D8D8D;
+    font-size: 15px;
+    font-family: 华文中宋, 方正姚体, serif;
+    font-weight: normal;
+    padding-right: 14px;
+}
+.layui-card-header h2 {
+    font-family: 华文中宋, 方正姚体, serif;
+}
+
+.card-image {
+    padding-left: 6px;
+    height: 144px
+}
+
+.main-column-right {
+    -webkit-box-shadow: 0 1px 6px #ccc;
+    -moz-box-shadow: 0 1px 6px #ccc;
+    -ms-box-shadow: 0 1px 6px #ccc;
+    -o-box-shadow: 0 1px 6px #ccc;
+    box-shadow: 0 1px 6px #ccc;
+    background: #FFFFFF;
+    border-bottom: 1px solid #ebebeb;
+    padding: 24px;
+    font-size: 14px;
+
+}
+.main-column-right-item{
+    height: 50px
+}
+.main-column-right-item:hover{
+    background-color: #F6F6F6;
+    border-radius: 5px;
+}
+.item-head-image{
+    width: 32px;height: 32px;border-radius: 100px;margin-right: 12px
+}
+

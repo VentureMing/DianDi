@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diandi.dao.author.AuthorAccountDao">
+    <select id="getAccountByEmail" resultType="AuthorAccount">
+        SELECT
+        a.author_id,
+        a.author_email,
+        a.register_date,
+        a.author_password
+        FROM author_account a
+        WHERE a.author_email = #{authorEmail}
+    </select>
+
+    <select id="getAccountById" resultType="AuthorAccount">
+        SELECT
+        a.author_id,
+        a.author_email,
+        a.register_date,
+        a.author_password
+        FROM author_account a
+        WHERE a.author_id = #{authorId}
+    </select>
+
+    <update id="update" parameterType="AuthorAccount">
+        UPDATE author_account
+        <set>
+            <if test="authorEmail != null">
+                author_email=#{authorEmail},
+            </if>
+            <if test="authorPassword != null">
+                author_password=#{authorPassword},
+            </if>
+            <if test="registerDate != null">
+                registerDate=#{registerDate},
+            </if>
+        </set>
+        <where>
+            author_id=#{authorId}
+        </where>
+    </update>
+
+    <insert id="insert" parameterType="AuthorAccount" useGeneratedKeys="true" keyProperty="authorId">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="authorId">
+            SELECT LAST_INSERT_ID() AS authorId
+        </selectKey>
+        INSERT INTO author_account (
+        author_email,
+        author_password,
+        register_date
+        ) VALUE (
+        #{authorEmail},
+        #{authorPassword},
+        NOW()
+        )
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM author_account
+        WHERE author_id = #{value}
+    </delete>
+
+    <select id="listId" resultType="int">
+        select author_id
+        from author_account
+        limit 0, #{value}
+    </select>
+</mapper>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diandi.dao.article.ArticleLikeDao">
+    <!--后续修改-->
+    <update id="update" parameterType="ArticleLike">
+        UPDATE article_like
+        <set>
+            <if test="articleId != null">
+                article_id=#{articleId},
+            </if>
+            liker_id=#{likerId},
+            likeDate=NOW()
+        </set>
+        <where>
+            articleId=#{articleId}
+        </where>
+    </update>
+
+    <delete id="delete">
+        DELETE FROM article_like
+        WHERE articleId = #{value}
+    </delete>
+
+    <insert id="insert" parameterType="ArticleLike" useGeneratedKeys="true" keyProperty="articleId">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="articleId">
+            SELECT LAST_INSERT_ID() AS articleId
+        </selectKey>
+        INSERT INTO article_like (
+        article_id,
+        liker_id,
+        like_date
+        ) VALUE (
+        #{articleId},
+        #{likerId},
+        NOW()
+        )
+    </insert>
+
+    <delete id="deleteLikeByAuthorId">
+        DELETE FROM article_like
+        WHERE article_id = #{articleId} AND liker_id = #{authorId}
+    </delete>
+
+    <select id="listAllLikeByArticleId" resultType="ArticleLike">
+        SELECT *
+        FROM article_like
+        WHERE article_id = #{value}
+    </select>
+
+    <select id="countLikeByLikerId" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM article_like
+        WHERE liker_id = #{value}
+    </select>
+
+    <select id="getLike" resultType="ArticleLike">
+        SELECT *
+        FROM article_like
+        WHERE article_id = #{articleId} AND liker_id = #{authorId}
+    </select>
+
+    <select id="listLikeArticle" resultType="ArticleLike">
+        SELECT *
+        FROM article_like
+        WHERE liker_id = #{authorId}
+        LIMIT #{offset}, #{rows}
+    </select>
+
+    <select id="listAllIdByAuthorId" resultType="ArticleLike">
+        SELECT article_id
+        FROM article_like
+        WHERE liker_id = #{value}
+    </select>
+</mapper>

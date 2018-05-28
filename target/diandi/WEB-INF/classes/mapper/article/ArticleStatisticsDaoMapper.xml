@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diandi.dao.article.ArticleStatisticsDao">
+
+
+    <insert id="insert" parameterType="ArticleStatistics" useGeneratedKeys="true" keyProperty="articleId">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="articleId">
+            SELECT LAST_INSERT_ID() AS articleId
+        </selectKey>
+        INSERT INTO article_statistics (
+        article_id,
+        comment_count,
+        view_count,
+        reply_comment_count,
+        collect_count,
+        complain_count,
+        share_count,
+        admire_count,
+        like_count,
+        release_date
+        ) VALUE (
+        #{articleId},
+        ifnull(#{commentCount}, 0),
+        ifnull(#{viewCount}, 0),
+        ifnull(#{replyCommentCount}, 0),
+        ifnull(#{collectCount}, 0),
+        ifnull(#{complainCount}, 0),
+        ifnull(#{shareCount}, 0),
+        ifnull(#{admireCount}, 0),
+        ifnull(#{likeCount}, 0),
+        NOW()
+        )
+    </insert>
+
+    <update id="update" parameterType="ArticleStatistics">
+        UPDATE article_statistics
+        <set>
+            <if test="commentCount != null">
+                comment_count=#{commentCount},
+            </if>
+            <if test="viewCount != null">
+                view_count=#{viewCount},
+            </if>
+            <if test="replyCommentCount != null">
+                reply_comment_count=#{replyCommentCount},
+            </if>
+            <if test="collectCount != null">
+                collect_count=#{collectCount},
+            </if>
+            <if test="complainCount != null">
+                complain_count=#{complainCount},
+            </if>
+            <if test="shareCount != null">
+                share_count=#{shareCount},
+            </if>
+            <if test="admireCount != null">
+                admire_count=#{admireCount},
+            </if>
+            <if test="likeCount != null">
+                like_count=#{likeCount}
+            </if>
+        </set>
+        <where>
+            article_id=#{articleId}
+        </where>
+    </update>
+    <!--根据article_id删除相关文章数据统计-->
+    <delete id="delete" parameterType="integer">
+        DELETE FROM article_statistics
+        WHERE article_id = #{articleId}
+    </delete>
+
+    <delete id="deleteByUnique" parameterType="integer">
+    DELETE FROM article_statistics
+    WHERE article_id = #{value}
+    </delete>
+
+    <select id="getStatistics" resultType="ArticleStatistics">
+        SELECT *
+        FROM article_statistics
+        WHERE article_id = #{articleId};
+    </select>
+
+    <update id="updateCommentCountPlus">
+        UPDATE article_statistics
+        SET comment_count = comment_count + 1
+        WHERE article_id = #{value}
+    </update>
+
+    <update id="updateViewCountPlus">
+        UPDATE article_statistics
+        SET view_count = view_count + 1
+        WHERE article_id = #{value}
+    </update>
+
+    <update id="updateReplyCommentCountPlus">
+        UPDATE article_statistics
+        SET reply_comment_count = reply_comment_count + 1
+        WHERE article_id = #{value}
+    </update>
+
+    <update id="updateCollectCountPlus">
+        UPDATE article_statistics
+        SET collect_count = collect_count + 1
+        WHERE article_id = #{value}
+    </update>
+
+    <update id="updateComplainCountPlus">
+        UPDATE article_statistics
+        SET complain_count = complain_count + 1
+        WHERE article_id = #{value}
+    </update>
+
+    <update id="updateShareCountPlus">
+        UPDATE article_statistics
+        SET share_count = share_count + 1
+        WHERE article_id = #{value}
+    </update>
+
+    <update id="updateAdmireCountPlus">
+        UPDATE article_statistics
+        SET admire_count = admire_count + 1
+        WHERE article_id = #{value}
+    </update>
+
+    <update id="updateLikeCountPlus">
+        UPDATE article_statistics
+        SET like_count = like_count + 1
+        WHERE article_id = #{value}
+    </update>
+
+    <update id="updateCommentCountMinus">
+        UPDATE article_statistics
+        SET comment_count = comment_count - 1
+        WHERE article_id = #{value}
+    </update>
+
+    <update id="updateViewCountMinus">
+        UPDATE article_statistics
+        SET view_count = view_count - 1
+        WHERE article_id = #{value}
+    </update>
+
+    <update id="updateReplyCommentCountMinus">
+        UPDATE article_statistics
+        SET reply_comment_count = reply_comment_count - 1
+        WHERE article_id = #{value}
+    </update>
+
+    <update id="updateCollectCountMinus">
+        UPDATE article_statistics
+        SET collect_count = collect_count - 1
+        WHERE article_id = #{value}
+    </update>
+
+    <update id="updateComplainCountMinus">
+        UPDATE article_statistics
+        SET complain_count = complain_count - 1
+        WHERE article_id = #{value}
+    </update>
+
+    <update id="updateShareCountMinus">
+        UPDATE article_statistics
+        SET share_count = share_count - 1
+        WHERE article_id = #{value}
+    </update>
+
+    <update id="updateAdmireCountMinus">
+        UPDATE article_statistics
+        SET admire_count = admire_count - 1
+        WHERE article_id = #{value}
+    </update>
+
+    <update id="updateLikeCountMinus">
+        UPDATE article_statistics
+        SET like_count = like_count - 1
+        WHERE article_id = #{value}
+    </update>
+
+
+    <select id="getCommentCount" resultType="java.lang.Integer">
+        SELECT comment_count
+        FROM article_statistics
+        WHERE article_id = #{value}
+    </select>
+
+    <select id="getViewCount" resultType="java.lang.Integer">
+        SELECT view_count
+        FROM article_statistics
+        WHERE article_id = #{value}
+    </select>
+
+    <select id="getReplyCommentCount" resultType="java.lang.Integer">
+        SELECT reply_comment_count
+        FROM article_statistics
+        WHERE article_id = #{value}
+    </select>
+
+    <select id="getCollectCount" resultType="java.lang.Integer">
+        SELECT collect_count
+        FROM article_statistics
+        WHERE article_id = #{value}
+    </select>
+
+    <select id="getComplainCount" resultType="java.lang.Integer">
+        SELECT complain_count
+        FROM article_statistics
+        WHERE article_id = #{value}
+    </select>
+
+    <select id="getShareCount" resultType="java.lang.Integer">
+        SELECT share_count
+        FROM article_statistics
+        WHERE article_id = #{value}
+    </select>
+
+    <select id="getAdmireCount" resultType="java.lang.Integer">
+        SELECT admire_count
+        FROM article_statistics
+        WHERE article_id = #{value}
+    </select>
+
+    <select id="getLikeCount" resultType="java.lang.Integer">
+        SELECT like_count
+        FROM article_statistics
+        WHERE article_id = #{value}
+    </select>
+
+</mapper>

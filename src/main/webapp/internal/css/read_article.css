@@ -1,0 +1,135 @@
+body {
+    background-color: #F6F6F6;
+    padding: 0;
+    margin: 0;
+
+}
+
+.header {
+    width: 816px;
+    height: 90px;
+    line-height: 90px;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.header .layui-nav {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0;
+    background: none;
+}
+
+.my-read-btn {
+
+    background-image: linear-gradient(#fdfdfd, #f8f8f8);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .11);
+    border: 0;
+}
+
+.article-container {
+    width: 816px;
+    left: auto;
+    margin: 0 auto;
+    position: static;
+    -webkit-box-shadow: 0 1px 6px #ccc;
+    -moz-box-shadow: 0 1px 6px #ccc;
+    -ms-box-shadow: 0 1px 6px #ccc;
+    -o-box-shadow: 0 1px 6px #ccc;
+    box-shadow: 0 1px 6px #ccc;
+    min-height: 600px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #ebebeb;
+    line-height: 24px;
+    font-size: 1.05em;
+    font-family: 微软雅黑, 华文细黑, "Segoe UI Semibold", serif;
+    font-weight: normal;
+
+}
+
+.article-container-box {
+    height: auto;
+    margin: 0 100px;
+    padding: 90px 0;
+    width: auto;
+    border-bottom: 1px solid #ebebeb;
+    font-family: 微软雅黑, 华文细黑, "Segoe UI Semibold", serif;
+    font-weight: normal;
+}
+
+.comment-footer {
+    width: 816px;
+    left: auto;
+    margin: 0 auto;
+    -webkit-box-shadow: 0 1px 6px #ccc;
+    -moz-box-shadow: 0 1px 6px #ccc;
+    -ms-box-shadow: 0 1px 6px #ccc;
+    -o-box-shadow: 0 1px 6px #ccc;
+    box-shadow: 0 1px 6px #ccc;
+    background: #FFFFFF;
+    border-bottom: 1px solid #ebebeb;
+    font-size: 1.05em;
+    font-family: 微软雅黑, 华文细黑, "Segoe UI Semibold", serif;
+    font-weight: normal;
+}
+
+.layui-nav span {
+    height: 0px;
+}
+
+.article-container-box-title {
+    font-size: 36px;
+    margin-bottom: 32px;
+    font-family: 华文中宋, 方正姚体, serif;
+}
+
+.article-container-box blockquote {
+
+    margin-bottom: 10px;
+    padding: 15px;
+    line-height: 22px;
+    border-left: 5px solid #009688;
+    border-radius: 0 2px 2px 0;
+    background-color: #f2f2f2
+
+}
+
+.article-container-box blockquote p {
+    font-family: 微软雅黑, 华文细黑, "Segoe UI Semibold", serif;
+    font-weight: normal;
+
+}
+
+.layui-nav-child dd {
+    margin: 0;
+    width: auto;
+    height: auto;
+}
+
+.layui-nav-child a:hover {
+    text-decoration: none;
+}
+
+.fixed-block {
+    height: auto;
+    width: 50px;
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+}
+
+.my-fixed-btn {
+
+    background-image: linear-gradient(#fdfdfd, #f8f8f8);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .11);
+    border: 1px;
+
+}
+.layui-nav-child dd a{
+    padding: 2px 6px
+}
+hr{
+    height: 1px;
+    border: 0px;
+}

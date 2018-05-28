@@ -1,0 +1,141 @@
+body {
+    background-color: #F6F6F6;
+}
+
+.home-list-container {
+    margin-left: 10%;
+    width: 78%;
+    margin-top: 10px;
+
+}
+
+#homeArticleList {
+    -webkit-box-shadow: 0 1px 6px #ccc;
+    -moz-box-shadow: 0 1px 6px #ccc;
+    -ms-box-shadow: 0 1px 6px #ccc;
+    -o-box-shadow: 0 1px 6px #ccc;
+    box-shadow: 0 1px 6px #ccc;
+    border-bottom: 1px solid #ebebeb
+}
+
+.home-column-right {
+    -webkit-box-shadow: 0 1px 6px #ccc;
+    -moz-box-shadow: 0 1px 6px #ccc;
+    -ms-box-shadow: 0 1px 6px #ccc;
+    -o-box-shadow: 0 1px 6px #ccc;
+    box-shadow: 0 1px 6px #ccc;
+    background: #FFFFFF;
+    border-bottom: 1px solid #ebebeb;
+    padding: 28px;
+    font-size: 14px;
+    min-light:400px;
+
+}
+
+.home-column-right-item {
+    margin: 8px 0;
+    cursor:hand;
+}
+
+.home-column-right-item-title {
+    margin: 12px 0;
+    color: #8D8D8D;
+}
+
+.home-column-right-item-title i {
+    padding-left: 16px;
+    color: #8D8D8D;
+}
+
+.home-column-right-item i {
+    padding-right: 10px;
+    color: #5FB878
+}
+
+.my-home-list-card {
+    margin-bottom: 0px;
+    border: 0px;
+    border-radius: 0px;
+    background-color: #fff;
+    box-shadow: none;
+    padding-left: 8px;
+}
+
+.my-home-card-header {
+    padding-top: 0px;
+    border-bottom: 0px
+}
+
+.home-card-content {
+    height: 96px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    margin: 4px 0;
+}
+
+.layui-card-body h4 {
+    color: #B4B4B4;
+    font-size: 15px;
+}
+
+.layui-card-body span {
+    color: #8D8D8D;
+    font-size: 15px;
+    font-family: 华文中宋, 方正姚体, serif;
+    font-weight: normal;
+    padding-right: 14px;
+}
+
+.layui-card-body i {
+    color: #d2d2d2;
+}
+
+.layui-card-header h2 {
+    font-family: 华文中宋, 方正姚体, serif;
+}
+
+.home-card-image {
+    padding-left: 6px;
+    height: 144px
+}
+
+.home-item-head-image {
+    width: 32px;
+    height: 32px;
+    border-radius: 100px;
+    margin-right: 12px
+}
+
+.home-top {
+    height: 80px;
+    margin-top: 24px;
+    margin-bottom: 16px
+}
+
+.home-top-image {
+    width: 80px;
+    border-radius: 100px
+}
+
+.home-top-info {
+    height: 80px
+}
+
+.home-top-author-name {
+    height: 40px;
+    font-size: 24px;
+    padding-top: 8px;
+    font-family: 华文中宋, 方正姚体, serif;
+}
+
+.home-top-author-statistics {
+    height: 40px;width: auto;font-size: 15px;
+}
+.home-top-author-statistics a{
+    color:#8D8D8D
+}
+.home-top-author-statistics span{
+    padding-right: 4px;
+}

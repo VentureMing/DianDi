@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diandi.dao.author.AuthorBasicDao">
+
+    <select id="getBasicInfoByAuthorId" resultType="AuthorBasic">
+        SELECT *
+        FROM author_basic
+        WHERE author_id = #{value}
+    </select>
+
+    <select id="getBasicInfoByPhone" resultType="AuthorBasic">
+        SELECT *
+        FROM author_basic
+        WHERE phone = #{value}
+    </select>
+
+    <select id="getBasicInfoByNickName" resultType="AuthorBasic">
+        SELECT *
+        FROM author_basic
+        WHERE nick_name = #{value}
+    </select>
+
+    <update id="update" parameterType="AuthorBasic">
+        UPDATE author_basic
+        <set>
+            <if test="profileId != null">
+                profile_id=#{profileId},
+            </if>
+            <if test="nickName != null">
+                nick_name=#{nickName},
+            </if>
+            <if test="phone != null">
+                phone=#{phone},
+            </if>
+
+            intro=#{intro}
+
+        </set>
+        <where>
+            author_id=#{authorId}
+        </where>
+    </update>
+
+    <delete id="delete">
+        DELETE FROM author_basic
+        WHERE author_id = #{value}
+    </delete>
+
+    <insert id="insert" parameterType="AuthorBasic" useGeneratedKeys="true" keyProperty="authorId">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="authorId">
+            SELECT LAST_INSERT_ID() AS authorId
+        </selectKey>
+        INSERT INTO author_basic (
+        author_id,
+        profile_id,
+        nick_name,
+        phone,
+        intro
+        ) VALUE (
+        #{authorId},
+        #{profileId},
+        #{nickName},
+        #{phone},
+        #{intro}
+        )
+    </insert>
+</mapper>

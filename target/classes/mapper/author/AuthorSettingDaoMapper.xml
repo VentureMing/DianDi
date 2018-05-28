@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diandi.dao.author.AuthorSettingDao">
+    <update id="update" parameterType="AuthorSetting">
+        UPDATE author_setting
+        <set>
+            <if test="mainPageNavPos != null">
+                main_page_nav_pos=#{mainPageNavPos},
+            </if>
+        </set>
+        <where>
+            articleId=#{articleId}
+        </where>
+    </update>
+
+    <update id="updateMainPageNavPos">
+        UPDATE author_setting
+        SET main_page_nav_pos = #{pos}
+        WHERE author_id = #{authorId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM author_setting
+        WHERE articleId = #{value}
+    </delete>
+
+    <select id="getSetting" resultType="AuthorSetting">
+        SELECT *
+        FROM author_setting
+        WHERE author_id = #{value}
+    </select>
+
+    <insert id="insert" parameterType="AuthorSetting" useGeneratedKeys="true" keyProperty="articleId">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="articleId">
+            SELECT LAST_INSERT_ID() AS articleId
+        </selectKey>
+        INSERT INTO author_setting (
+        author_id,
+        main_page_nav_pos
+        ) VALUE (
+        #{authorId},
+        #{mainPageNavPos}
+        )
+    </insert>
+</mapper>

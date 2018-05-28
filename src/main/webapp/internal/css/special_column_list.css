@@ -1,0 +1,31 @@
+body{
+
+    background: linear-gradient(#F6F6F6,#FBFCFC); /* 标准的语法 */
+}
+.special-column-container {
+    margin-left: 15.8%;
+    width: 69%;
+    min-height: 600px;
+
+}
+.special-column-item{
+    -webkit-box-shadow: 0 1px 6px #ccc;
+    -moz-box-shadow: 0 1px 6px #ccc;
+    -ms-box-shadow: 0 1px 6px #ccc;
+    -o-box-shadow: 0 1px 6px #ccc;
+    box-shadow: 0 1px 6px #ccc;
+    background: #FFFFFF;
+    border-bottom: 1px solid #ebebeb;
+    height: 256px;
+    margin: 12px;
+}
+.special-column-item:hover{
+    -webkit-box-shadow: 0 2px 6px #8D8D8D;
+    -moz-box-shadow: 0 2px 6px #8D8D8D;
+    -ms-box-shadow: 0 2px 6px #8D8D8D;
+    -o-box-shadow: 0 2px 6px #8D8D8D;
+    box-shadow: 0 2px 6px #8D8D8D;
+    background: #FFFFFF;
+    border-bottom: 1px solid #ebebeb;
+
+}

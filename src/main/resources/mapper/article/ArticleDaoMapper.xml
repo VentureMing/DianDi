@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diandi.dao.article.ArticleDao">
+
+
+    <update id="update" parameterType="Article">
+        UPDATE article
+        <set>
+            <if test="authorId != null">
+                author_id=#{authorId},
+            </if>
+            <if test="articleState != null">
+                article_state=#{articleState},
+            </if>
+            <if test="articleTitl != null">
+                article_title=#{articleTitle},
+            </if>
+            <if test="articleContentHtml != null">
+                article_content=#{articleContentHtml},
+            </if>
+            <if test="articleContentMd != null">
+                article_content_md=#{articleContentMd},
+            </if>
+            <if test="summary != null">
+                summary=#{summary},
+            </if>
+            <if test="releaseDate != null">
+                release_date=#{releaseDate},
+            </if>
+
+            nearest_modify_date=NOW(),
+
+            <if test="keyWords != null">
+                key_words=#{keyWords},
+            </if>
+            <if test="wordCount != null">
+                word_count=#{wordCount},
+            </if>
+        </set>
+        <where>
+            article_id=#{articleId}
+        </where>
+
+    </update>
+
+    <delete id="delete">
+        DELETE FROM article
+        WHERE article_id = #{value}
+    </delete>
+
+    <insert id="insert" parameterType="Article" useGeneratedKeys="true" keyProperty="articleId">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="articleId">
+            SELECT LAST_INSERT_ID() AS articleId
+        </selectKey>
+        INSERT INTO article (
+        author_id,
+
+        article_state,
+        article_title,
+        article_content_html,
+        article_content_md,
+        summary,
+        release_date,
+        nearest_modify_date,
+        key_words,
+        word_count
+        ) VALUE (
+        #{authorId},
+
+        ifnull(#{articleState}, 0), # state 0 为正在审核
+        #{articleTitle},
+        #{articleContentHtml},
+        #{articleContentMd},
+        #{summary},
+        NOW(),
+        NOW(),
+        #{keyWords},
+        ifnull(#{wordCount}, 0)
+        )
+    </insert>
+
+
+    <select id="listArticleIdsByAuthorIds" resultType="java.lang.Integer" parameterType="list">
+        SELECT DISTINCT art.article_id
+        FROM article art WHERE art.author_id IN
+        <foreach collection="authorIds"
+                 item="articleId"
+                 open="("
+                 separator=","
+                 close=")">
+            #{articleId}
+        </foreach>
+        AND art.article_state=#{status}
+    </select>
+
+
+    <select id="listArticle" resultType="Article">
+        SELECT *
+        FROM article
+        WHERE article_state = #{status} AND author_id = #{authorId}
+    </select>
+
+    <!--<select articleId="listArticleWithLimit" resultType="Article">-->
+        <!--SELECT *-->
+        <!--FROM article b-->
+        <!--WHERE state = #{status} AND b.articleId = #{authorId}-->
+        <!--LIMIT #{offset}, #{rows}-->
+    <!--</select>-->
+    <select id="listAll" resultType="Article">
+        SELECT *
+        FROM article
+    </select>
+
+
+
+
+    <select id="listArticleByArticleIds" resultType="Article" parameterType="list">
+        SELECT *
+        FROM article art WHERE art.article_id IN
+        <foreach collection="ids"
+                 item="articleId"
+                 open="("
+                 separator=","
+                 close=")">
+            #{articleId}
+        </foreach>
+        AND art.article_state=#{status}
+    </select>
+
+    <select id="getArticleIdByUniqueKey" resultType="java.lang.Integer">
+        SELECT article_id
+        FROM article
+        WHERE author_id = #{authorId} AND article_title = #{title}
+    </select>
+
+    <select id="getArticleById" resultType="Article">
+        SELECT *
+        FROM article
+        WHERE article_id = #{value}
+    </select>
+
+    <select id="getArticleIdById" resultType="java.lang.Integer">
+        SELECT art.article_id
+        FROM article art
+        WHERE art.article_id = #{value}
+    </select>
+
+
+
+
+    <select id="countArticleByAuthorId" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM article
+        WHERE author_id = #{authorId} AND article_state = #{state}
+    </select>
+
+    <select id="listAllWordCountByAuthorId" resultType="Article">
+        SELECT
+        article_id,
+        word_count
+        FROM article
+        WHERE author_id = #{authorId} AND article_state = #{state}
+    </select>
+
+    <select id="listAllByFormat" resultType="Article">
+        SELECT
+        article_id,
+        article_state,
+        article_title,
+        <choose>
+            <when test="format == 1">
+                article_content_html,
+            </when>
+            <otherwise>
+                artcile_content_md,
+            </otherwise>
+        </choose>
+        summary,
+        release_date,
+        nearest_modify_date,
+        key_words,
+        word_count
+        FROM article
+        WHERE author_id = #{authorId}
+    </select>
+
+
+</mapper>

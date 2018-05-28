@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--读者配置-->
+    <bean class="com.diandi.manager.properties.ReaderProperties" name="readerProperties">
+        <property name="requestAuthorArticleListCount" value="${reader.requestAuthorArticleListCount}"/>
+        <property name="requestAuthorArticleCommentCount" value="${reader.requestAuthorArticleCommentCount}"/>
+    </bean>
+
+    <!--数据库配置-->
+    <bean class="com.diandi.manager.properties.DBProperties" name="dbProperties">
+        <property name="stringFiledSplitCharacterForNumber" value="${db.stringFiledSplitCharacterForNumber}"/>
+        <property name="stringFiledSplitCharacterForString" value="${db.stringFiledSplitCharacterForString}"/>
+    </bean>
+
+    <!--博主配置-->
+    <bean class="com.diandi.manager.properties.AuthorProperties" name="authorProperties">
+        <!--<property name="requestAuthorLinkCount" value="${blogger.requestBloggerLinkCount}"/>-->
+        <property name="authorImageRootPath" value="${author.authorImageRootPath}"/>
+        <property name="imageManagerAuthorId" value="${author.imageManagerAuthorId}"/>
+        <property name="requestAuthorImageCount" value="${author.requestAuthorImageCount}"/>
+        <property name="requestAuthorCollectCount" value="${author.requestAuthorCollectCount}"/>
+        <property name="defaultArticleCollectCategory" value="${author.defaultArticleCollectCategory}"/>
+        <property name="mainPageNavPos" value="${author.mainPageNavPos}"/>
+        <property name="requestAuthorArticleCategoryCount" value="${author.requestAuthorArticleCategoryCount}"/>
+        <property name="sessionNameOfAuthorId" value="${author.session.authorId}"/>
+        <property name="sessionNameOfAuthorNickName" value="${author.session.authorNickName}"/>
+        <property name="sessionAuthorLoginSignal" value="${author.session.sessionAuthorLoginSignal}"/>
+        <property name="sessionNameOfErrorMsg" value="${author.session.errorMsg}"/>
+        <property name="requestArticleListCount" value="${author.requestArticleListCount}"/>
+        <property name="requestAuthorArticleLabelCount" value="${article.requestAuthorArticleLabelCount}"/>
+        <property name="pageOwnerAuthorId" value="${author.pageOwnerAuthorId}"/>
+        <property name="pageOwnerAuthorNickName" value="${author.pageOwnerAuthorNickName}"/>
+        <property name="patchImportArticleTempPath" value="${author.patchImportArticleTempPath}"/>
+        <property name="patchDownloadArticleTempPath" value="${author.patchDownloadArticleTempPath}"/>
+    </bean>
+
+    <!--站点配置-->
+    <bean class="com.diandi.manager.properties.WebSiteProperties" name="websiteProperties">
+        <property name="addr" value="${website.addr}"/>
+        <property name="urlConditionSplitCharacter" value="${website.urlConditionSplitCharacter}"/>
+        <property name="luceneIndexDir" value="${website.luceneIndexDir}"/>
+        <property name="manageEmailAddress" value="${website.manageEmailAddress}"/>
+        <property name="mailSenderAddress" value="${website.mailSenderAddress}"/>
+        <property name="mailSenderPassword" value="${website.mailSenderPassword}"/>
+        <property name="webSiteActiveAuthorCount" value="${website.webSiteActiveAuthorCount}"/>
+    </bean>
+
+    <!--管理者-->
+    <context:component-scan base-package="com.diandi.manager"/>
+
+</beans>
